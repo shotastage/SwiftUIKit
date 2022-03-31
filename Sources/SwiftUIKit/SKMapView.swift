@@ -50,7 +50,7 @@ struct UIKitMapView: UIViewRepresentable {
 
 struct MapKitView_Previews: PreviewProvider {
     static var previews: some View {
-        MapKitView()
+        SKMapView()
             .edgesIgnoringSafeArea(.all)
     }
 }

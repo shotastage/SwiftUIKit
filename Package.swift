@@ -7,6 +7,7 @@ let package = Package(
     name: "SwiftUIKit",
     platforms: [
         .macCatalyst(.v13),
+        .macOS(.v11),
         .iOS(.v13),
         .watchOS(.v6),
         .tvOS(.v14)
