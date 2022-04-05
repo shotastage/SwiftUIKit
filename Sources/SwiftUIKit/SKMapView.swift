@@ -15,13 +15,13 @@ import Cocoa
 #endif
 
 
-struct SKMapView: View {
+public struct SKMapView: View {
     // 35.458911, 139.631277
     @State var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 35.458911, longitude: 139.631277),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
 
-    var body: some View {
+    public var body: some View {
         if #available(iOS 14.0, *) {
             Map(coordinateRegion: $region)
         } else {
@@ -30,7 +30,7 @@ struct SKMapView: View {
     }
 }
 
-struct UIKitMapView: UIViewRepresentable {
+private struct UIKitMapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
 
     @Binding var coordinateRegion: MKCoordinateRegion
@@ -48,9 +48,11 @@ struct UIKitMapView: UIViewRepresentable {
     }
 }
 
+#if DEBUG
 struct MapKitView_Previews: PreviewProvider {
     static var previews: some View {
         SKMapView()
             .edgesIgnoringSafeArea(.all)
     }
 }
+#endif
