@@ -21,6 +21,8 @@ public struct SKMapView: View {
         center: CLLocationCoordinate2D(latitude: 35.458911, longitude: 139.631277),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
 
+    public init() { }
+
     public var body: some View {
         if #available(iOS 14.0, *) {
             Map(coordinateRegion: $region)
