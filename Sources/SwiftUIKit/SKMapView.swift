@@ -21,13 +21,15 @@ public struct SKMapView: View {
         center: CLLocationCoordinate2D(latitude: 35.458911, longitude: 139.631277),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
 
+    @State var showsUserLocation: Bool = false
+
     public init() { }
 
     public var body: some View {
         if #available(iOS 14.0, *) {
-            Map(coordinateRegion: $region)
+            Map(coordinateRegion: $region, showsUserLocation: showsUserLocation)
         } else {
-            UIKitMapView(coordinateRegion: $region)
+            UIKitMapView(coordinateRegion: $region, showsUserLocation: $showsUserLocation)
         }
     }
 }
@@ -36,6 +38,8 @@ private struct UIKitMapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
 
     @Binding var coordinateRegion: MKCoordinateRegion
+
+    @Binding var showsUserLocation: Bool
 
     let map = MKMapView()
 
@@ -46,6 +50,7 @@ private struct UIKitMapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
 
         uiView.mapType = .satellite
+        uiView.showsUserLocation = showsUserLocation
         uiView.setRegion(coordinateRegion, animated: true)
     }
 }
