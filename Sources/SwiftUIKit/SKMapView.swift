@@ -17,19 +17,21 @@ import Cocoa
 
 public struct SKMapView: View {
     // 35.458911, 139.631277
-    @State var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 35.458911, longitude: 139.631277),
-        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
 
-    @State var showsUserLocation: Bool = false
+    var region: Binding<CLLocationCoordinate2D>
+    
+    var showsUserLocation: Bool
 
-    public init() { }
+    public init(region: Binding<CLLocationCoordinate2D>, showsUserLocation: Bool = false) {
+        self.region = region
+        self.showsUserLocation = showsUserLocation
+    }
 
     public var body: some View {
         if #available(iOS 14.0, *) {
             Map(coordinateRegion: $region, showsUserLocation: showsUserLocation)
         } else {
-            UIKitMapView(coordinateRegion: $region, showsUserLocation: $showsUserLocation)
+            UIKitMapView(coordinateRegion: $region, showsUserLocation: showsUserLocation)
         }
     }
 }
@@ -39,8 +41,9 @@ private struct UIKitMapView: UIViewRepresentable {
 
     @Binding var coordinateRegion: MKCoordinateRegion
 
-    @Binding var showsUserLocation: Bool
+    var showsUserLocation: Bool
 
+    
     let map = MKMapView()
 
     func makeUIView(context: Context) -> MKMapView {
@@ -57,8 +60,13 @@ private struct UIKitMapView: UIViewRepresentable {
 
 #if DEBUG
 struct MapKitView_Previews: PreviewProvider {
+    
+     @Binding static var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 35.458911, longitude: 139.631277),
+        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+
     static var previews: some View {
-        SKMapView()
+        SKMapView(region: region)
             .edgesIgnoringSafeArea(.all)
     }
 }
