@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+#if !os(tvOS) || !os(watchOS)
 import WebKit
 
 public struct SKWebView: UIViewRepresentable {
@@ -45,6 +46,18 @@ public struct SKWebView: UIViewRepresentable {
         webView.load(request)
     }
 }
+#else
+
+public struct SKWebView: View {
+    let url: String
+    
+    public var body: some View {
+        Text("Can not preview \(url) on tvOS or watchOS.")
+    }
+}
+
+#endif
+
 
 #if DEBUG
 struct SKWebView_Previews: PreviewProvider {
