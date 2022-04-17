@@ -7,8 +7,11 @@
 
 import SwiftUI
 
-struct SKBlankView: View {
-    var body: some View {
+public struct SKBlankView: View {
+    
+    public init() {}
+    
+    public var body: some View {
         Text("__BLANK__")
     }
 }

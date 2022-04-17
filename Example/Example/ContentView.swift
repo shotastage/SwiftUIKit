@@ -17,13 +17,13 @@ struct ContentView: View {
 
     @State private var showUserLocation = true
 
-    private let views = ["🗺 Map View", "🌏 Web View", "⬛️ Blank View"]
+    private let viewSource = ViewDataSource.allCases
 
     var body: some View {
         NavigationView {
-            List(views, id: \.self) { view in
-                NavigationLink(destination: Text("\(view)番目のView")) {
-                    Text(view)
+            List(viewSource, id: \.self) { view in
+                NavigationLink(destination: view.screen) {
+                    Text(view.name)
                 }
             }
             .navigationTitle("SwiftUIKit Views")

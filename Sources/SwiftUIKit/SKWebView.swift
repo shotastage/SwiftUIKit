@@ -10,7 +10,11 @@ import SwiftUI
 import WebKit
 
 public struct SKWebView: UIViewRepresentable {
-    let url: String
+    public var url: String
+
+    public init(url: String) {
+        self.url = url
+    }
 
     public class Coordinator: NSObject, WKUIDelegate, WKNavigationDelegate {
 
@@ -50,7 +54,7 @@ public struct SKWebView: UIViewRepresentable {
 
 public struct SKWebView: View {
     let url: String
-    
+
     public var body: some View {
         Text("Can not preview \(url) on tvOS or watchOS.")
     }
