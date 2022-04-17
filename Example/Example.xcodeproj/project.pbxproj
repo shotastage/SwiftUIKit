@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25090FFE280B959A00E3CBF8 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 25090FFD280B959A00E3CBF8 /* SwiftUIKit */; };
 		25FB90B12800948800AAE059 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB90B02800948800AAE059 /* ExampleApp.swift */; };
 		25FB90B32800948800AAE059 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB90B22800948800AAE059 /* ContentView.swift */; };
 		25FB90B52800948900AAE059 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25FB90B42800948900AAE059 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		25090FFC280B956D00E3CBF8 /* SwiftUIKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIKit; path = ..; sourceTree = "<group>"; };
 		25FB90AD2800948800AAE059 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25FB90B02800948800AAE059 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		25FB90B22800948800AAE059 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25090FFE280B959A00E3CBF8 /* SwiftUIKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,13 +74,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25090FFA280B954500E3CBF8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		25090FFB280B956D00E3CBF8 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				25090FFC280B956D00E3CBF8 /* SwiftUIKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		25FB90A42800948800AAE059 = {
 			isa = PBXGroup;
 			children = (
+				25090FFB280B956D00E3CBF8 /* Packages */,
 				25FB90AF2800948800AAE059 /* Example */,
 				25FB90C02800948900AAE059 /* ExampleTests */,
 				25FB90CA2800948900AAE059 /* ExampleUITests */,
 				25FB90AE2800948800AAE059 /* Products */,
+				25090FFA280B954500E3CBF8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +163,9 @@
 			dependencies = (
 			);
 			name = Example;
+			packageProductDependencies = (
+				25090FFD280B959A00E3CBF8 /* SwiftUIKit */,
+			);
 			productName = Example;
 			productReference = 25FB90AD2800948800AAE059 /* Example.app */;
 			productType = "com.apple.product-type.application";
@@ -416,7 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = Example/Assets.xcassets;
 				DEVELOPMENT_TEAM = 8T4P9D4TB2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -445,7 +468,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Example/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = Example/Assets.xcassets;
 				DEVELOPMENT_TEAM = 8T4P9D4TB2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -583,6 +606,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		25090FFD280B959A00E3CBF8 /* SwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftUIKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 25FB90A52800948800AAE059 /* Project object */;
 }
