@@ -63,7 +63,7 @@ struct PickerExampleView: View {
     var body: some View {
         VStack {
             Picker(selection: $selection, label: Text("Select View")) {
-                ForEach(0 ..< viewSources.count) { idx in
+                ForEach(0 ..< viewSources.count, id: \.self) { idx in
                     Text(self.viewSources[idx].name)
                 }
             }
