@@ -9,7 +9,9 @@ import SwiftUI
 import SwiftUIKit
 import MapKit
 
-enum ViewDataSource: CaseIterable {
+enum ViewDataSource: CaseIterable, Identifiable {
+
+    var id: Self { self }
 
     case map
     case web
@@ -19,20 +21,19 @@ enum ViewDataSource: CaseIterable {
     @ViewBuilder
     var screen: some View {
         switch self {
-        case .map: MapPreview().ignoresSafeArea()
-        case .web: SKWebView(url: "https://apple.com").ignoresSafeArea()
+        case .map: MapPreview().padding(.top, -50) // Maybe MapKit bug?
+        case .web: SKWebView(url: "https://apple.com")
         case .blank: SKBlankView()
         case .picker: PickerExampleView()
         }
     }
-    
+
     var name: String {
         switch self {
         case .map: return "🗺 Map View"
         case .web: return "🌏 Web View"
         case .blank: return "⬛️ Blank View"
         case .picker: return "⛏ Example Picker"
-
         }
     }
 }
@@ -41,7 +42,7 @@ enum ViewDataSource: CaseIterable {
 struct MapPreview: View {
     
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.334_900, longitude: -122.009_020),
+        center: CLLocationCoordinate2D(latitude: 35.445848, longitude: 139.649769),
         latitudinalMeters: 750,
         longitudinalMeters: 750
     )
@@ -57,7 +58,7 @@ struct PickerExampleView: View {
     
     private var viewSources = ViewDataSource.allCases
     
-    @State private var selection = 3
+    @State private var selection = 0
 
     var body: some View {
         VStack {
