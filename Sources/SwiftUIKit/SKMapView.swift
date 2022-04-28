@@ -14,22 +14,39 @@ import UIKit
 import Cocoa
 #endif
 
+public struct SKAnnotationItem<ElementView: View>: Identifiable {
+    public let id: UUID
+    let location: CLLocationCoordinate2D
+    let view: ElementView
+
+    public init(id: UUID = UUID(), lat: Double, long: Double, view: ElementView) {
+        self.id = id
+        self.location = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        self.view = view
+    }
+}
 
 public struct SKMapView: View {
-    // 35.458911, 139.631277
 
     var region: Binding<MKCoordinateRegion>
     
     var showsUserLocation: Binding<Bool>
 
-    public init(region: Binding<MKCoordinateRegion>, showsUserLocation: Binding<Bool>) {
+    var annotations: [SKAnnotationItem<AnyView>]
+
+    public init(region: Binding<MKCoordinateRegion>, showsUserLocation: Binding<Bool>, annotationItems: [SKAnnotationItem<AnyView>]) {
         self.region = region
         self.showsUserLocation = showsUserLocation
+        self.annotations = annotationItems
     }
 
     public var body: some View {
         if #available(iOS 14.0, *) {
-            Map(coordinateRegion: region)
+            Map(coordinateRegion: region, annotationItems: annotations) { place in
+                MapAnnotation(coordinate: place.location) {
+                    place.view
+                }
+            }
         } else {
             UIKitMapView(coordinateRegion: region, showsUserLocation: showsUserLocation)
         }
@@ -43,7 +60,6 @@ private struct UIKitMapView: UIViewRepresentable {
 
     @Binding var showsUserLocation: Bool
 
-    
     let map = MKMapView()
 
     func makeUIView(context: Context) -> MKMapView {
@@ -59,15 +75,27 @@ private struct UIKitMapView: UIViewRepresentable {
 }
 
 #if DEBUG
+
 struct MapKitView_Previews: PreviewProvider {
     
-     @State static var region = MKCoordinateRegion(
+    
+    @State static var annotationItems = [
+        SKAnnotationItem(lat: 35.453189, long: 139.638021, view: AnyView(
+            Circle().foregroundColor(.red).frame(width: 25, height: 25))
+        ),
+        SKAnnotationItem(lat: 35.451780, long: 139.636005, view: AnyView(
+            Circle().foregroundColor(.blue).frame(width: 25, height: 25))
+        ),
+    ]
+    
+    @State static var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 35.458911, longitude: 139.631277),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
 
     @State static var showUserLocarion = true
+
     static var previews: some View {
-        SKMapView(region: $region, showsUserLocation: $showUserLocarion)
+        SKMapView(region: $region, showsUserLocation: $showUserLocarion, annotationItems: annotationItems)
             .edgesIgnoringSafeArea(.all)
     }
 }
