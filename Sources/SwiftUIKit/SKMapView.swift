@@ -32,17 +32,24 @@ public struct SKMapView: View {
     
     var showsUserLocation: Binding<Bool>
 
-    var annotations: [SKAnnotationItem<AnyView>]
+    var annotations: [SKAnnotationItem<AnyView>]?
 
-    public init(region: Binding<MKCoordinateRegion>, showsUserLocation: Binding<Bool>, annotationItems: [SKAnnotationItem<AnyView>]) {
+    // Initializer for no-annotation map
+    public init(region: Binding<MKCoordinateRegion>, showsUserLocation: Binding<Bool>) {
+        self.region = region
+        self.showsUserLocation = showsUserLocation
+    }
+
+    // Initializer with annotations map
+    public init(region: Binding<MKCoordinateRegion>, showsUserLocation: Binding<Bool>, annotationItems: [SKAnnotationItem<AnyView>]?) {
         self.region = region
         self.showsUserLocation = showsUserLocation
         self.annotations = annotationItems
     }
-
+    
     public var body: some View {
         if #available(iOS 14.0, *) {
-            Map(coordinateRegion: region, annotationItems: annotations) { place in
+            Map(coordinateRegion: region, annotationItems: annotations ?? []) { place in
                 MapAnnotation(coordinate: place.location) {
                     place.view
                 }
@@ -50,6 +57,20 @@ public struct SKMapView: View {
         } else {
             UIKitMapView(coordinateRegion: region, showsUserLocation: showsUserLocation)
         }
+    }
+}
+
+// Custom Map View for ~< iOS13
+
+private struct UIKitAnnotationItem<ElementView: UIView> {
+    let title: String
+    let coordinate: CLLocationCoordinate2D
+    let view: ElementView
+
+    init(title: String = UUID().uuidString, coordinate: CLLocationCoordinate2D, view: ElementView) {
+        self.title = title
+        self.coordinate = coordinate
+        self.view = view
     }
 }
 
@@ -67,10 +88,16 @@ private struct UIKitMapView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-
         uiView.mapType = .satellite
         uiView.showsUserLocation = showsUserLocation
         uiView.setRegion(coordinateRegion, animated: true)
+        
+        let childView = UIHostingController(rootView: AnyView(Text("HELLO")))
+        uiView.addSubview(childView.view)
+    }
+
+    func convertAnnotation() {
+    
     }
 }
 
