@@ -15,7 +15,7 @@ import Cocoa
 #endif
 
 
-public enum SKMapUserTrackingMode: Hashable {
+public enum SKMapUserTrackingModes: Hashable {
     case none
     case follow
 
@@ -28,6 +28,33 @@ public enum SKMapUserTrackingMode: Hashable {
     }
 }
 
+public enum SKMapInteractionModes: Hashable {
+    case all
+    case pan
+    case zoom
+
+    @available(iOS 14.0, *)
+    var nativeMapUserTrackingMode: MapInteractionModes {
+        switch self {
+        case .all: return MapInteractionModes.all
+        case .pan: return MapInteractionModes.pan
+        case .zoom: return MapInteractionModes.zoom
+        }
+    }
+}
+
+public enum SKMapUserTrackingMode: Hashable {
+    case follow
+    case none
+    
+    @available(iOS 14.0, *)
+    var nativeMapUserTrackingMode: MapUserTrackingMode {
+        switch self {
+        case .follow: return MapUserTrackingMode.follow
+        case .none: return MapUserTrackingMode.none
+        }
+    }
+}
 
 public struct SKAnnotationItem<ElementView: View>: Identifiable {
     public let id: UUID
@@ -45,27 +72,40 @@ public struct SKAnnotationItem<ElementView: View>: Identifiable {
 public struct SKMapView: View {
 
     var region: Binding<MKCoordinateRegion>
-    
+
     var showsUserLocation: Binding<Bool>
 
     var annotations: [SKAnnotationItem<AnyView>]?
+    
+    var interactionModes: SKMapInteractionModes
 
     // Initializer for no-annotation map
-    public init(region: Binding<MKCoordinateRegion>, showsUserLocation: Binding<Bool>) {
+    public init(
+        region: Binding<MKCoordinateRegion>,
+        showsUserLocation: Binding<Bool>,
+        interactionModes: SKMapInteractionModes = .all,
+        userTrackingMode: SKMapUserTrackingMode = .none) {
         self.region = region
         self.showsUserLocation = showsUserLocation
+        self.interactionModes = interactionModes
     }
 
     // Initializer with annotations map
-    public init(region: Binding<MKCoordinateRegion>, showsUserLocation: Binding<Bool>, annotationItems: [SKAnnotationItem<AnyView>]?) {
+    public init(
+        region: Binding<MKCoordinateRegion>,
+        showsUserLocation: Binding<Bool>,
+        interactionModes: SKMapInteractionModes = .all,
+        userTrackingMode: SKMapUserTrackingMode = .none,
+        annotationItems: [SKAnnotationItem<AnyView>]?) {
         self.region = region
         self.showsUserLocation = showsUserLocation
+        self.interactionModes = interactionModes
         self.annotations = annotationItems
     }
     
     public var body: some View {
         if #available(iOS 14.0, *) {
-            Map(coordinateRegion: region, annotationItems: annotations ?? []) { place in
+            Map(coordinateRegion: region, interactionModes: .all, showsUserLocation: showsUserLocation.wrappedValue, annotationItems: annotations ?? []) { place in
                 MapAnnotation(coordinate: place.location) {
                     place.view
                 }
@@ -120,8 +160,7 @@ private struct UIKitMapView: UIViewRepresentable {
 
 #if DEBUG
 struct MapKitView_Previews: PreviewProvider {
-    
-    
+
     @State static var annotationItems = [
         SKAnnotationItem(lat: 35.453189, long: 139.638021, view: AnyView(
             Circle().foregroundColor(.red).frame(width: 25, height: 25))
@@ -130,15 +169,15 @@ struct MapKitView_Previews: PreviewProvider {
             Circle().foregroundColor(.blue).frame(width: 25, height: 25))
         ),
     ]
-    
+
     @State static var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 35.458911, longitude: 139.631277),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
 
-    @State static var showUserLocarion = true
+    @State static var showUserLocation = true
 
     static var previews: some View {
-        SKMapView(region: $region, showsUserLocation: $showUserLocarion, annotationItems: annotationItems)
+        SKMapView(region: $region, showsUserLocation: $showUserLocation, userTrackingMode: .follow, annotationItems: annotationItems)
             .edgesIgnoringSafeArea(.all)
     }
 }
