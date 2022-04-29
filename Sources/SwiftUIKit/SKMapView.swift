@@ -14,6 +14,21 @@ import UIKit
 import Cocoa
 #endif
 
+
+public enum SKMapUserTrackingMode: Hashable {
+    case none
+    case follow
+
+    @available(iOS 14.0, *)
+    var nativeMapUserTrackingMode: MapUserTrackingMode {
+        switch self {
+        case .none: return MapUserTrackingMode.none
+        case .follow: return MapUserTrackingMode.follow
+        }
+    }
+}
+
+
 public struct SKAnnotationItem<ElementView: View>: Identifiable {
     public let id: UUID
     let location: CLLocationCoordinate2D
@@ -25,6 +40,7 @@ public struct SKAnnotationItem<ElementView: View>: Identifiable {
         self.view = view
     }
 }
+
 
 public struct SKMapView: View {
 
@@ -60,8 +76,8 @@ public struct SKMapView: View {
     }
 }
 
-// Custom Map View for ~< iOS13
 
+// Custom Map View for ~< iOS13
 private struct UIKitAnnotationItem<ElementView: UIView> {
     let title: String
     let coordinate: CLLocationCoordinate2D
@@ -101,8 +117,8 @@ private struct UIKitMapView: UIViewRepresentable {
     }
 }
 
-#if DEBUG
 
+#if DEBUG
 struct MapKitView_Previews: PreviewProvider {
     
     
