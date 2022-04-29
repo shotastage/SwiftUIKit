@@ -46,7 +46,7 @@ public enum SKMapInteractionModes: Hashable {
 public enum SKMapUserTrackingMode: Hashable {
     case follow
     case none
-    
+
     @available(iOS 14.0, *)
     var nativeMapUserTrackingMode: MapUserTrackingMode {
         switch self {
@@ -76,7 +76,7 @@ public struct SKMapView: View {
     var showsUserLocation: Binding<Bool>
 
     var annotations: [SKAnnotationItem<AnyView>]?
-    
+
     var interactionModes: SKMapInteractionModes
 
     // Initializer for no-annotation map
@@ -102,10 +102,13 @@ public struct SKMapView: View {
         self.interactionModes = interactionModes
         self.annotations = annotationItems
     }
-    
+
     public var body: some View {
         if #available(iOS 14.0, *) {
-            Map(coordinateRegion: region, interactionModes: .all, showsUserLocation: showsUserLocation.wrappedValue, annotationItems: annotations ?? []) { place in
+            Map(coordinateRegion: region,
+            interactionModes: .all,
+            showsUserLocation: showsUserLocation.wrappedValue,
+            annotationItems: annotations ?? []) { place in
                 MapAnnotation(coordinate: place.location) {
                     place.view
                 }
@@ -147,13 +150,13 @@ private struct UIKitMapView: UIViewRepresentable {
         uiView.mapType = .satellite
         uiView.showsUserLocation = showsUserLocation
         uiView.setRegion(coordinateRegion, animated: true)
-        
+
         let childView = UIHostingController(rootView: AnyView(Text("HELLO")))
         uiView.addSubview(childView.view)
     }
 
     func convertAnnotation() {
-    
+
     }
 }
 
