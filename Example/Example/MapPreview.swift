@@ -33,3 +33,12 @@ struct MapPreview: View {
             .edgesIgnoringSafeArea(.all)
     }
 }
+
+
+#if DEBUG
+struct MapPreview_Previews: PreviewProvider {
+    static var previews: some View {
+        MapPreview()
+    }
+}
+#endif

@@ -20,7 +20,7 @@ public enum SKMapUserTrackingModes: Hashable {
     case follow
 
     @available(iOS 14.0, *)
-    var nativeMapUserTrackingMode: MapUserTrackingMode {
+    var uiValue: MapUserTrackingMode {
         switch self {
         case .none: return MapUserTrackingMode.none
         case .follow: return MapUserTrackingMode.follow
@@ -34,7 +34,7 @@ public enum SKMapInteractionModes: Hashable {
     case zoom
 
     @available(iOS 14.0, *)
-    var nativeMapUserTrackingMode: MapInteractionModes {
+    var uiValue: MapInteractionModes {
         switch self {
         case .all: return MapInteractionModes.all
         case .pan: return MapInteractionModes.pan
@@ -48,7 +48,7 @@ public enum SKMapUserTrackingMode: Hashable {
     case none
 
     @available(iOS 14.0, *)
-    var nativeMapUserTrackingMode: MapUserTrackingMode {
+    var uiValue: MapUserTrackingMode {
         switch self {
         case .follow: return MapUserTrackingMode.follow
         case .none: return MapUserTrackingMode.none
