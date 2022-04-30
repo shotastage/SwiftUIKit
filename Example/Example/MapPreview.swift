@@ -11,11 +11,7 @@ import SwiftUIKit
 
 struct MapPreview: View {
     
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 35.445848, longitude: 139.649769),
-        latitudinalMeters: 750,
-        longitudinalMeters: 750
-    )
+    @StateObject private var viewModel = MapViewModel()
 
     @State private var showUserLocation: Bool = true
 
@@ -29,7 +25,7 @@ struct MapPreview: View {
     ]
 
     var body: some View {
-        SKMapView(region: $region, showsUserLocation: $showUserLocation, userTrackingMode: .follow, annotationItems: annotationItems)
+        SKMapView(region: $viewModel.region, showsUserLocation: $showUserLocation, userTrackingMode: $viewModel.tracking.wrappedValue, annotationItems: annotationItems)
             .edgesIgnoringSafeArea(.all)
     }
 }

@@ -43,18 +43,6 @@ public enum SKMapInteractionModes: Hashable {
     }
 }
 
-public enum SKMapUserTrackingMode: Hashable {
-    case follow
-    case none
-
-    @available(iOS 14.0, *)
-    var uiValue: MapUserTrackingMode {
-        switch self {
-        case .follow: return MapUserTrackingMode.follow
-        case .none: return MapUserTrackingMode.none
-        }
-    }
-}
 
 public struct SKAnnotationItem<ElementView: View>: Identifiable {
     public let id: UUID
@@ -84,7 +72,7 @@ public struct SKMapView: View {
         region: Binding<MKCoordinateRegion>,
         showsUserLocation: Binding<Bool>,
         interactionModes: SKMapInteractionModes = .all,
-        userTrackingMode: SKMapUserTrackingMode = .none) {
+        userTrackingMode: SKMapUserTrackingModes = .none) {
         self.region = region
         self.showsUserLocation = showsUserLocation
         self.interactionModes = interactionModes
@@ -95,7 +83,7 @@ public struct SKMapView: View {
         region: Binding<MKCoordinateRegion>,
         showsUserLocation: Binding<Bool>,
         interactionModes: SKMapInteractionModes = .all,
-        userTrackingMode: SKMapUserTrackingMode = .none,
+        userTrackingMode: SKMapUserTrackingModes = .none,
         annotationItems: [SKAnnotationItem<AnyView>]?) {
         self.region = region
         self.showsUserLocation = showsUserLocation

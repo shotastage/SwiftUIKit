@@ -10,6 +10,7 @@
 		25090FFE280B959A00E3CBF8 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 25090FFD280B959A00E3CBF8 /* SwiftUIKit */; };
 		25420884280C5AFD0090E384 /* ViewSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25420883280C5AFD0090E384 /* ViewSources.swift */; };
 		25724465281C33AA003DEA32 /* MapPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25724464281C33AA003DEA32 /* MapPreview.swift */; };
+		25724467281D1316003DEA32 /* MapPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25724466281D1315003DEA32 /* MapPreviewViewModel.swift */; };
 		25FB90B12800948800AAE059 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB90B02800948800AAE059 /* ExampleApp.swift */; };
 		25FB90B32800948800AAE059 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB90B22800948800AAE059 /* ContentView.swift */; };
 		25FB90B52800948900AAE059 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25FB90B42800948900AAE059 /* Assets.xcassets */; };
@@ -40,6 +41,8 @@
 		25090FFC280B956D00E3CBF8 /* SwiftUIKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftUIKit; path = ..; sourceTree = "<group>"; };
 		25420883280C5AFD0090E384 /* ViewSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSources.swift; sourceTree = "<group>"; };
 		25724464281C33AA003DEA32 /* MapPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreview.swift; sourceTree = "<group>"; };
+		25724466281D1315003DEA32 /* MapPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPreviewViewModel.swift; sourceTree = "<group>"; };
+		25724468281D830B003DEA32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		25FB90AD2800948800AAE059 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25FB90B02800948800AAE059 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		25FB90B22800948800AAE059 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,8 +121,10 @@
 		25FB90AF2800948800AAE059 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				25724468281D830B003DEA32 /* Info.plist */,
 				25420883280C5AFD0090E384 /* ViewSources.swift */,
 				25FB90B02800948800AAE059 /* ExampleApp.swift */,
+				25724466281D1315003DEA32 /* MapPreviewViewModel.swift */,
 				25724464281C33AA003DEA32 /* MapPreview.swift */,
 				25FB90B22800948800AAE059 /* ContentView.swift */,
 				25FB90B42800948900AAE059 /* Assets.xcassets */,
@@ -287,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25420884280C5AFD0090E384 /* ViewSources.swift in Sources */,
+				25724467281D1316003DEA32 /* MapPreviewViewModel.swift in Sources */,
 				25FB90B32800948800AAE059 /* ContentView.swift in Sources */,
 				25FB90B12800948800AAE059 /* ExampleApp.swift in Sources */,
 				25724465281C33AA003DEA32 /* MapPreview.swift in Sources */,
@@ -451,7 +457,8 @@
 				DEVELOPMENT_TEAM = 8T4P9D4TB2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Sample Location App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -480,7 +487,8 @@
 				DEVELOPMENT_TEAM = 8T4P9D4TB2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Example/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Sample Location App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
