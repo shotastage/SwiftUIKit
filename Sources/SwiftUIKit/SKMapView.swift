@@ -15,7 +15,7 @@ import Cocoa
 #endif
 
 
-public enum SKMapUserTrackingModes: Hashable {
+public enum SKMapUserTrackingModes: Equatable {
     case none
     case follow
 
@@ -28,7 +28,7 @@ public enum SKMapUserTrackingModes: Hashable {
     }
 }
 
-public enum SKMapInteractionModes: Hashable {
+public enum SKMapInteractionModes: Equatable {
     case all
     case pan
     case zoom
