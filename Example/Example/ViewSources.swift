@@ -22,7 +22,7 @@ enum ViewDataSource: CaseIterable, Identifiable {
     var screen: some View {
         switch self {
         case .map: MapPreview().padding(.top, -50) // Maybe MapKit bug?
-        case .web: SKWebView(url: "https://apple.com")
+        case .web: SKWebView(url: "https://apple.com", loadingMode: .indicator)
         case .blank: SKBlankView()
         case .picker: PickerExampleView()
         }
