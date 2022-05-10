@@ -34,7 +34,7 @@ public struct SKWebView: UIViewRepresentable {
         
         switch loadingMode {
         case .none:
-            print("Now under construction...")
+            break
         case .indicator:
             indicatorView = UIActivityIndicatorView()
         case .progress:
@@ -139,7 +139,7 @@ public struct SKWebView: View {
 #if DEBUG
 struct SKWebView_Previews: PreviewProvider {
     static var previews: some View {
-        SKWebView(url: "http://apple.com")
+        SKWebView(url: "http://apple.com", loadingMode: .progress)
     }
 }
 #endif
