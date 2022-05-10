@@ -5,6 +5,7 @@
 //  Created by Shota Shimazu on 2022/04/17.
 //
 
+import UIKit
 import SwiftUI
 import SwiftUIKit
 import MapKit

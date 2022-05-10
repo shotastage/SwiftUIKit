@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 #if !os(tvOS) || !os(watchOS)
 import WebKit
 
@@ -18,6 +19,7 @@ public enum SKWebLoadingMode {
 }
 
 public struct SKWebView: UIViewRepresentable {
+
     public var url: String
 
     public var userAgent: String?
@@ -89,17 +91,9 @@ public struct SKWebView: UIViewRepresentable {
 
     public func makeUIView(context: Context) -> WKWebView {
 
-        if let bgColor = backgroundColor {
-            webView.backgroundColor = bgColor
-        }
-
-        if let ua = userAgent {
-            webView.customUserAgent = ua
-        }
-
         switch loadingMode {
         case .none:
-            print("Now under construction...")
+            break
         case .indicator:
             webView.addSubview(indicatorView!)
             setupIndicator()
@@ -107,7 +101,7 @@ public struct SKWebView: UIViewRepresentable {
             webView.addSubview(progressView!)
             setupProgressBar()
         case .custom:
-            print("Now under construction...")
+            break
         }
 
         return webView
@@ -136,6 +130,21 @@ public struct SKWebView: UIViewRepresentable {
     }
 }
 
+
+extension SKWebView {
+    public func background(_ color: Color) -> SKWebView {
+        let view = self
+        view.webView.backgroundColor = SKColor(color).uiColor
+        return view
+    }
+
+    public func userAgent(_ ua: String) -> SKWebView {
+        let view = self
+        view.webView.customUserAgent = ua
+        return view
+    }
+}
+
 #else
 
 public struct SKWebView: View {
@@ -153,6 +162,7 @@ public struct SKWebView: View {
 struct SKWebView_Previews: PreviewProvider {
     static var previews: some View {
         SKWebView(url: "http://apple.com", loadingMode: .progress)
+            .background(.blue)
     }
 }
 #endif
