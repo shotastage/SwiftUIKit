@@ -20,6 +20,10 @@ public enum SKWebLoadingMode {
 public struct SKWebView: UIViewRepresentable {
     public var url: String
 
+    public var userAgent: String?
+
+    public var backgroundColor: UIColor?
+
     var loadingMode: SKWebLoadingMode
 
     var webView = WKWebView()
@@ -84,6 +88,15 @@ public struct SKWebView: UIViewRepresentable {
     }
 
     public func makeUIView(context: Context) -> WKWebView {
+
+        if let bgColor = backgroundColor {
+            webView.backgroundColor = bgColor
+        }
+
+        if let ua = userAgent {
+            webView.customUserAgent = ua
+        }
+
         switch loadingMode {
         case .none:
             print("Now under construction...")
