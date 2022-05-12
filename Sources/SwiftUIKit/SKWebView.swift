@@ -5,7 +5,6 @@
 //  Created by Shota Shimazu on 2022/04/05.
 //
 
-import SwiftUI
 import UIKit
 #if !os(tvOS) || !os(watchOS)
 import WebKit

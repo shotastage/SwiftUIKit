@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 import SwiftUIKit
 import MapKit
 

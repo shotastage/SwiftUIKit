@@ -5,8 +5,6 @@
 //  Created by Shota Shimazu on 2022/04/16.
 //
 
-import SwiftUI
-
 public struct SKBlankView: View {
     
     public init() {}

@@ -5,7 +5,6 @@
 //  Created by Shota Shimazu on 2022/04/11.
 //
 
-import SwiftUI
 import AVFoundation
 
 struct SKCameraView: View {
