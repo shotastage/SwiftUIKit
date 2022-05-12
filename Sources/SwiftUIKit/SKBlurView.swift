@@ -14,6 +14,10 @@ public struct SKBlurView: UIViewRepresentable {
 
     let view = UIView(frame: .zero)
 
+    public init(style: UIBlurEffect.Style) {
+        self.style = style
+    }
+
     public func makeUIView(context: UIViewRepresentableContext<SKBlurView>) -> UIView {
         
         let blurEffect = UIBlurEffect(style: style)

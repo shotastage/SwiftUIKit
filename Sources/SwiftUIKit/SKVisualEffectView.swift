@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct SKVisualEffectView: UIViewRepresentable {
-    var effect: UIVisualEffect?
+    public var effect: UIVisualEffect?
 
     public func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView {
         UIVisualEffectView()
