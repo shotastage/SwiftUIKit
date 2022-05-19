@@ -69,7 +69,7 @@ public struct SKMapView: View {
 
 
     @available(iOS 14.0, *)
-    public var view: some View {
+    public var mapView: some View {
         Map(coordinateRegion: region,
         interactionModes: .all,
         showsUserLocation: showsUserLocation.wrappedValue,
@@ -106,10 +106,18 @@ public struct SKMapView: View {
 
     public var body: some View {
         if #available(iOS 14.0, *) {
-            view
+            mapView
         } else {
             UIKitMapView(coordinateRegion: region, showsUserLocation: showsUserLocation)
         }
+    }
+}
+
+extension SKMapView {
+    public func setRegion(_ region: MKCoordinateRegion) -> SKMapView {
+        var view = self
+        view.region = .constant(region)
+        return view
     }
 }
 
