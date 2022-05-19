@@ -67,6 +67,19 @@ public struct SKMapView: View {
 
     var interactionModes: SKMapInteractionModes
 
+
+    @available(iOS 14.0, *)
+    public var view: some View {
+        Map(coordinateRegion: region,
+        interactionModes: .all,
+        showsUserLocation: showsUserLocation.wrappedValue,
+        annotationItems: annotations ?? []) { place in
+            MapAnnotation(coordinate: place.location) {
+                place.view
+            }
+        }
+    }
+
     // Initializer for no-annotation map
     public init(
         region: Binding<MKCoordinateRegion>,
@@ -93,14 +106,7 @@ public struct SKMapView: View {
 
     public var body: some View {
         if #available(iOS 14.0, *) {
-            Map(coordinateRegion: region,
-            interactionModes: .all,
-            showsUserLocation: showsUserLocation.wrappedValue,
-            annotationItems: annotations ?? []) { place in
-                MapAnnotation(coordinate: place.location) {
-                    place.view
-                }
-            }
+            view
         } else {
             UIKitMapView(coordinateRegion: region, showsUserLocation: showsUserLocation)
         }
