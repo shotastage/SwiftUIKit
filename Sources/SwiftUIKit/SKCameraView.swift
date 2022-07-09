@@ -8,6 +8,11 @@
 import AVFoundation
 
 struct SKCameraView: View {
+    
+    init() {
+        print("SWIFˇUIKIT: CameraView is now under construction!")
+    }
+
     var body: some View {
         Text("Hello, Camera View!")
     }
